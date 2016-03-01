@@ -1,0 +1,352 @@
+# bindings
+bind V screen -t vim vim
+bind R screen -t root sudo su -
+bind I screen -t irssi irssi
+bind P screen -t python python
+
+# default windows
+screen -t bash bash
+screen -t python python
+
+
+###############################################################
+# RANDOM
+###############################################################
+escape `` 	#set escape key to backtick instead of Ctrl-A
+msgwait 1
+startup_message off	#turn startup message off
+defscrollback 2048
+#screen bash
+
+
+###############################################################
+#STATUS LINE
+###############################################################
+
+# hardstatus on
+# hardstatus alwayslastline
+# hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}]%{=b C}[ %m/%d %c ]%{W}'
+
+# don't use the hardstatus line for system messages, use reverse video instead
+# (we'll be using it for the list of tab windows - see hardstatus alwayslastline
+# below)
+hardstatus off
+
+# use the caption line for the computer name, load, hstatus (as set by zsh), & time
+# the caption line gets repeated for each window being displayed (using :split),
+# so we'll use color cues to differentiate the caption of the current, active
+# window, and the others.
+#    always                  - display the caption continuously.  Since
+#                              hardstatus is 'alwayslastline', it will be on the
+#                              next to last line.
+#    "%?%F"                  - if (leading '%?') this region has focus ('%F') 
+#                              (e.g. it's the only region being displayed, or,
+#                              if in split-screen mode, it's the currently active
+#                              region)
+#      "%{= Kk}"               - set the colorscheme to blac[k] on grey (bright blac[K]),
+#                                with no other effects (standout, underline, etc.)
+#    "%:"                    - otherwise ('%:' between a pair of '%?'s)
+#      "%{=u kR}"              - set the colorscheme to [R]ed on blac[k], and
+#                                underline it, but no other effects (bold, standout, etc.) 
+#    "%?"                    - end if (trailing '%?')
+#    "  %h "                 - print two spaces, then the [h]ardstatus of the
+#                              current tab window (as set by zsh - see zshrc) and
+#                              then another space.
+#    "%-024="                - either pad (with spaces) or truncate the previous
+#                              text so that the rest of the caption string starts
+#                              24 characters ('024') from the right ('-') edge of
+#                              the caption line.
+#                              NOTE: omitting the '0' before the '24' would pad
+#                              or truncate the text so it would be 24% from the
+#                              right.
+#    "%{+b}                  - add ('+') [b]old to the current text effects, but
+#                              don't change the current colors.
+#    " %C:%s%a %D %d %M %Y"  - print the [C]urrent time, a colon, the [s]econds,
+#                              whether it's [a]m or pm, the [D]ay name, the [d]ay
+#                              of the month, the [M]onth, and the [Y]ear.
+#                              (this takes up 24 characters, so the previous
+#                              pad/truncate command makes sure the clock doesn't
+#                              get pushed off of the caption line)
+#    "%{= dd}"               - revert to the [d]efault background and [d]efault
+#                              foreground colors, respectively, with no ('= ')
+#                              other effects.
+caption always           "%?%F%{= Kk}%:%{=u KB}%?  %h %-024=%{+b} %C%a %D %d %M %Y%{= db}"
+# use the hardstatus line for the window list
+#    alwayslastline      - always display the hardstatus as the last line of the
+#                          terminal
+#    "%{= kR} %-Lw"      - change to a blac[k] background with bright [R]ed text,
+#                          and print all the tab [w]indow numbers and titles in
+#                          the [L]ong format (ie with flags) upto ('-') the
+#                          current tab window
+#    "%{=b Kk} %n%f %t " - change to grey (bright blac[K]) background with
+#                          [b]old blac[k] text, with no other effects, and print
+#                          the [n]umber of the current tab window, any [f]lags it
+#                          might have, and the [t]itle of the current tab window
+#                          (as set by zsh - see zshrc).
+#                          NOTE: the color match with the caption line makes it
+#                          appear as if a 'tab' is dropping down from the caption
+#                          line, highlighting the number & title of the current
+#                          tab window.  Nifty, ain't it)
+#    "%{-}%+Lw "         - revert to the previous color scheme (red on black)
+#                          and print all the tab [w]indow numbers and titles in
+#                          the [L]ong format (ie with flags) after ('+') the
+#                          current tab window.
+#    "%=%{= dd}"         - pad all the way to the right (since there is no text
+#                          that follows this) and revert to the [d]efault
+#                          background and [d]efault foreground colors, with no
+#                          ('= ') other effects.
+hardstatus alwayslastline "%{= kB} %-Lw%{=b KB} %n%f %t %{-}%+Lw %=%{= dd}"
+
+# VARIABLES
+# ===============================================================
+# No annoying audible bell, using "visual bell"
+  vbell on				# default: off
+  vbell_msg "   -- Bell,Bell!! --   "	# default: "Wuff,Wuff!!"
+
+# Automatically detach on hangup. 
+  autodetach on				# default: on
+
+# Don't display the copyright page
+  startup_message off			# default: on
+
+# Uses nethack-style messages
+# nethack on				# default: off
+
+# Affects the copying of text regions
+  crlf off				# default: off
+
+# Enable/disable multiuser mode. Standard screen operation is singleuser.
+# In multiuser mode the commands acladd, aclchg, aclgrp and acldel can be used
+# to enable (and disable) other user accessing this screen session.
+# Requires suid-root.
+  multiuser on
+
+# Change default scrollback value for new windows
+  defscrollback 1000			# default: 100
+
+# Define the time that all windows monitored for silence should 
+# wait before displaying a message. Default 30 seconds.
+  silencewait 15			# default: 30
+
+# bufferfile:   The file to use for commands
+#               "readbuf" ('<') and  "writebuf" ('>'):
+# bufferfile            $HOME/.screen_exchange
+#
+# hardcopydir:  The directory which contains all hardcopies.
+# hardcopydir           ~/.hardcopy
+# hardcopydir           ~/.screen
+#
+# shell:  Default process started in screen's windows.
+# Makes it possible to use a different shell inside screen
+# than is set as the default login shell.
+# If begins with a '-' character, the shell will be started as a login shell.
+# shell                 zsh
+# shell                 bash
+# shell                 ksh
+# shell -$SHELL
+shell bash
+
+# shellaka '> |tcsh'
+# shelltitle '$ |bash'
+
+# emulate .logout message
+  pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
+# caption always " %w --- %c:%s"
+# caption always "%3n %t%? @%u%?%? [%h]%?%=%c"
+
+# advertise hardstatus support to $TERMCAP
+# termcapinfo  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+
+# set every new windows hardstatus line to somenthing descriptive
+# defhstatus "screen: ^En (^Et)"
+
+# don't kill window after the process died
+# zombie "^["
+
+################################################################
+# KEY BINDINGS
+###############################################################
+# bind F7  to detach screen session from this terminal
+# bind F8  to kill current screen window.
+# bind F9  to create a new screen
+# bind F10 to rename current screen window
+# bind F11 to move to previous window
+# bind F12 to move to next window
+bindkey -k k7 detach
+bindkey -k k8 kill
+bindkey -k k9 screen
+bindkey -k k; title
+bindkey -k F1 prev
+bindkey -k F2 next
+bindkey -k k2 resize +1
+bindkey -k k1 resize -1
+#
+# The following list shows the default bindings:
+#
+# break       ^B b
+# clear       C
+# colon       :
+# copy        ^[ [
+# detach      ^D d
+# digraph     ^V
+# displays    *
+# dumptermcap .
+# fit         F
+# flow        ^F f
+# focus       ^I
+# hardcopy    h
+# help        ?
+# history     { }
+# info        i
+# kill        K k
+# lastmsg     ^M m
+# license     ,
+# log         H
+# login       L
+# meta        x
+# monitor     M
+# next        ^@ ^N sp n
+# number      N
+# only        Q
+# other       ^X
+# pow_break   B
+# pow_detach  D
+# prev        ^H ^P p ^?
+# quit        \
+# readbuf     <
+# redisplay   ^L l
+# remove      X
+# removebuf   =
+# reset       Z
+# screen      ^C c
+# select      " '
+# silence     _
+# split       S
+# suspend     ^Z z
+# time        ^T t
+# title       A
+# vbell       ^G
+# version     v
+# width       W
+# windows     ^W w
+# wrap        ^R r
+# writebuf    >
+# xoff        ^S s
+# xon         ^Q q
+# ^]  paste .
+# -   select -
+# 0   select 0
+# 1   select 1
+# 2   select 2
+# 3   select 3
+# 4   select 4
+# 5   select 5
+# 6   select 6
+# 7   select 7
+# 8   select 8
+# 9   select 9
+# I   login on
+# O   login off
+# ]   paste .
+#
+
+# And here are the default bind commands if you need them:
+#
+# bind A title
+# bind C clear
+# bind D pow_detach
+# bind F fit
+# bind H log
+# bind I login on
+# bind K kill
+# bind L login
+# bind M monitor
+# bind N number
+# bind O login off
+# bind Q only
+# bind S split
+# bind W width
+# bind X remove
+# bind Z reset
+
+# Let's remove some dangerous key bindings ...
+  bind k
+  bind ^k
+# bind .  dumptermcap # default
+  bind .
+# bind ^\ quit        # default
+  bind ^\
+# bind \\ quit        # default
+  bind \\
+# bind ^h ???         # default
+  bind ^h
+# bind h  hardcopy    # default
+  bind h
+
+# ... and make them better.
+  bind 'K' kill
+#  bind 'I' login on
+#  bind 'O' login off
+#  bind '}' history
+
+# Yet another hack:
+# Prepend/append register [/] to the paste if ^a^] is pressed.
+# This lets me have autoindent mode in vi.
+#  register [ "\033:se noai\015a"
+#  register ] "\033:se ai\015a"
+#  bind ^] paste [.]
+
+
+# hardstatus alwaysignore
+# hardstatus alwayslastline "%Lw"
+
+# Resize the current region. The space will be removed from or added to 
+# the region below or if there's not enough space from the region above.
+  bind = resize =
+  bind + resize +3
+  bind - resize -3
+# bind _ resize max
+#
+# attrcolor u "-u b"
+# attrcolor b "R"
+
+# STARTUP SCREENS
+# ===============================================================
+# Defines the time screen delays a new message when one message
+# is currently displayed. The default is 1 second.
+#  msgminwait 2
+
+# Time a message is displayed if screen is not disturbed by
+# other activity. The dafault is 5 seconds:
+#  msgwait 2
+
+# Briefly show the version number of this starting
+# screen session - but only for *one* second:
+#  msgwait 1
+#  version
+
+# Welcome the user:
+# echo "welcome :-)"
+# echo "I love you today."
+
+# Uncomment one/some following lines to automatically let
+# SCREEN start some programs in the given window numbers:
+# screen -t MAIL        0 mutt
+# screen -t EDIT        1 vim
+# screen -t GOOGLE      2 links http://www.google.com
+# screen -t NEWS        3 slrn
+# screen -t WWW         4 links http://www.math.fu-berlin.de/~guckes/
+# screen 5
+# screen 6
+
+# Set the environment variable var to value string. If only var is specified,
+# you'll be prompted to enter a value. If no parameters are specified,
+# you'll be prompted for both variable and value. The environment is
+# inherited by all subsequently forked shells.
+#setenv PROMPT_COMMAND 'echo -n -e "\033k\033\134"'
+
+# Don't you want to start programs which need a DISPLAY ?
+setenv DISPLAY ':0.0'
+
+altscreen on
