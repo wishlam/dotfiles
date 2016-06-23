@@ -1,0 +1,4 @@
+set show-all-if-ambiguous on
+TAB: menu-complete
+"\C-p": history-search-backward
+"\C-n": history-search-forward
