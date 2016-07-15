@@ -1,4 +1,7 @@
 set show-all-if-ambiguous on
-TAB: menu-complete
+set colored-stats on
+set completion-query-items 0
+set page-completions off
+
 "\C-p": history-search-backward
 "\C-n": history-search-forward
