@@ -5,3 +5,5 @@ set page-completions off
 
 "\C-p": history-search-backward
 "\C-n": history-search-forward
+"\e\e[C": forward-word
+"\e\e[D": backward-word
