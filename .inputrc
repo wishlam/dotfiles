@@ -9,10 +9,12 @@ set page-completions off
 "\e\e[C": forward-word
 "\e\e[D": backward-word
 
-TAB: menu-complete
-
 # RESEARCH
 #
+
+# This sucks because it's ambiguous; it doesn't tell us what options exist.
+# TAB: menu-complete
+
 # ESCAPE + X
 #"\e[1~": beginning-of-line
 #"\e[4~": end-of-line
@@ -31,5 +33,4 @@ TAB: menu-complete
 #set convert-meta off
 #set input-meta on
 #set output-meta on
-#set show-all-if-ambiguous on
 #set visible-stats on
