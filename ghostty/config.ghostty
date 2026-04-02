@@ -1,0 +1,23 @@
+theme = Zenburned
+
+cursor-style = block
+cursor-style-blink = true
+cursor-opacity = 1
+
+mouse-hide-while-typing = true
+
+scrollbar = system
+scrollback-limit = 10240
+
+background-opacity = 0.7
+background-blur = true
+
+font-family = ""
+font-family = "Hack"
+font-family = "DejaVu Sans Mono"
+font-family = "Monaco"
+
+clipboard-paste-protection = true
+clipboard-trim-trailing-spaces = true
+
+window-inherit-working-directory = false
