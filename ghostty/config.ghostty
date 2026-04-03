@@ -7,7 +7,8 @@ cursor-opacity = 1
 mouse-hide-while-typing = true
 
 scrollbar = system
-scrollback-limit = 10240
+# in bytes, so 10MB
+scrollback-limit = 10240000
 
 background-opacity = 0.7
 background-blur = true
