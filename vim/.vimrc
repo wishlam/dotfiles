@@ -125,6 +125,6 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 "colorscheme darkburn
 colorscheme gruvbox
 set background=dark
-hi Search ctermfg=Yellow ctermbg=Magenta cterm=bold,underline
+hi Search ctermfg=Black ctermbg=Magenta cterm=bold,underline
 hi Visual ctermfg=DarkGray ctermbg=LightCyan
 set term=xterm-256color
